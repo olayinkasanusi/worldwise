@@ -27,6 +27,8 @@ function Form() {
   const [country, setCountry] = useState("Portugal");
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
+  const [emoji, setEmoji] = useState("");
+  const [geocodingError, setGeocodingError] = useState("");
 
   useEffect(
     function () {
@@ -38,7 +40,16 @@ function Form() {
             `${BASE_URL}?latitude=${lat}&longitude=${lng}`
           );
           const data = await res.json();
+
           console.log(data);
+
+          if (!data.countryCode)
+            throw new Error(
+              "That doesn't seem to be a city, click somewhere else 🙌"
+            );
+          setCityName(data.city || data.locality || "");
+          setCountry(data.countryName);
+          setEmoji(convertToEmoji(data.countryCode));
         } catch (err) {
           console.log(err);
         } finally {
@@ -59,7 +70,7 @@ function Form() {
           onChange={(e) => setCityName(e.target.value)}
           value={cityName}
         />
-        <span className={styles.flag}>Hello</span>
+        <span className={styles.flag}>{emoji}</span>
       </div>
 
       <div className={styles.row}>
