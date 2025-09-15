@@ -47,7 +47,7 @@ function Map() {
         setZoom(12);
       }
     },
-    [geoLocationPosition]
+    [geoLocationPosition.lat, geoLocationPosition.lng]
   );
 
   return (
