@@ -47,6 +47,42 @@
       },
       "date": "2025-09-15T19:54:50.968Z",
       "notes": "youyo"
+    },
+    {
+      "id": "aefa",
+      "cityName": "Torre de Moncorvo",
+      "country": "Portugal",
+      "emoji": "🇵🇹",
+      "position": {
+        "lat": "41.209098089007036",
+        "lng": "-6.987304687500001"
+      },
+      "date": "2025-09-15T20:02:56.243Z",
+      "notes": "lol"
+    },
+    {
+      "id": "0b5f",
+      "cityName": "Abuja",
+      "country": "Nigeria",
+      "emoji": "🇳🇬",
+      "position": {
+        "lat": "8.817287472561238",
+        "lng": "7.486787824107834"
+      },
+      "date": "2025-09-09T20:02:56.000Z",
+      "notes": "I visited Zuma Rock"
+    },
+    {
+      "id": "ccd8",
+      "cityName": "Ibadan",
+      "country": "Nigeria",
+      "emoji": "🇳🇬",
+      "position": {
+        "lat": "7.340341063804243",
+        "lng": "3.8973804947771167"
+      },
+      "date": "2025-09-09T20:02:56.000Z",
+      "notes": "I live here"
     }
   ]
 }
