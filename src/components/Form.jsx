@@ -71,7 +71,7 @@ function Form() {
     [lat, lng]
   );
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!cityName || !date) return;
 
@@ -84,7 +84,7 @@ function Form() {
       notes,
     };
 
-    createCity(newCity);
+    await createCity(newCity);
 
     navigate("/app/cities");
   }
