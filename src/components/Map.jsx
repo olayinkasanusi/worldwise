@@ -9,7 +9,7 @@ import {
   Marker,
   Popup,
   useMap,
-  useMapEvent,
+  useMapEvents,
 } from "react-leaflet";
 import { useEffect, useState } from "react";
 import { useCities } from "../contexts/CitiesContext";
@@ -23,8 +23,6 @@ function Map() {
     position: geoLocationPosition,
     getPosition,
   } = useGeolocation();
-
-  const navigate = useNavigate();
 
   const mapLat = lat || 40;
   const mapLng = lng || 0;
@@ -51,12 +49,7 @@ function Map() {
   );
 
   return (
-    <div
-      className={styles.mapContainer}
-      onClick={() => {
-        navigate("form");
-      }}
-    >
+    <div className={styles.mapContainer}>
       {!geoLocationPosition.lat && (
         <Button type="position" onClick={getPosition}>
           {isLoadingPosition ? <Spinner /> : "Use your Position"}
@@ -101,7 +94,8 @@ function ChangePopUp({ position }) {
 
 function HandleClick() {
   const navigate = useNavigate();
-  useMapEvent({
+
+  useMapEvents({
     click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
   });
 }

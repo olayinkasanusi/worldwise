@@ -6,6 +6,8 @@ import styles from "./Form.module.css";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import Message from "./Message";
+import Spinner from "./Spinner";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -32,9 +34,12 @@ function Form() {
 
   useEffect(
     function () {
+      if (!lat && !lng) return;
+
       async function fetchCityData() {
         try {
           setIsLoadingGeocoding(true);
+          setGeocodingError("");
 
           const res = await fetch(
             `${BASE_URL}?latitude=${lat}&longitude=${lng}`
@@ -47,11 +52,13 @@ function Form() {
             throw new Error(
               "That doesn't seem to be a city, click somewhere else 🙌"
             );
-          setCityName(data.city || data.locality || "");
-          setCountry(data.countryName);
-          setEmoji(convertToEmoji(data.countryCode));
+          if (data.lookupSource === "coordinates") {
+            setCityName(data.city || data.locality || "");
+            setCountry(data.countryName);
+            setEmoji(convertToEmoji(data.countryCode));
+          }
         } catch (err) {
-          console.log(err);
+          setGeocodingError(err.message);
         } finally {
           setIsLoadingGeocoding(false);
         }
@@ -60,6 +67,12 @@ function Form() {
     },
     [lat, lng]
   );
+
+  if (isLoadingGeocoding) return <Spinner />;
+
+  if (!lat && !lng) return <Message message="start by clicking the map" />;
+
+  if (geocodingError) return <Message message={geocodingError} />;
 
   return (
     <form className={styles.form}>
@@ -97,7 +110,7 @@ function Form() {
           type="back"
           onClick={(e) => {
             e.preventDefault();
-            navigate(-1);
+            navigate("/app/cities");
           }}
         >
           &larr; Back
