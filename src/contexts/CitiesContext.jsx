@@ -113,7 +113,7 @@ function CitiesProvider({ children }) {
   }
 
   async function getCity(id) {
-    if (+id === currentCity.id) return;
+    if (id === currentCity.id) return;
     dispatch({ type: "loading" });
     try {
       const res = await fetch(`${BASE_URL}/cities/${id}`);

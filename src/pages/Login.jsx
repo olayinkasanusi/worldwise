@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import PageNav from "../components/PageNav";
+import { useAuth } from "../contexts/FakeAuthContext";
 import styles from "./Login.module.css";
 import { useState } from "react";
 
@@ -7,6 +9,11 @@ export default function Login() {
   const [email, setEmail] = useState("jack@example.com");
   const [password, setPassword] = useState("qwerty");
 
+  const navigate = useNavigate();
+
+  const auth = useAuth();
+
+  console.log(auth);
   return (
     <main className={styles.login}>
       <PageNav />
@@ -32,7 +39,7 @@ export default function Login() {
         </div>
 
         <div>
-          <button>Login</button>
+          <button onClick={() => {}}>Login</button>
         </div>
       </form>
     </main>
