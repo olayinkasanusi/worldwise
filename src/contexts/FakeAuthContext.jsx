@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 
 import { createContext, useReducer, useContext } from "react";
@@ -65,6 +66,7 @@ function useAuth() {
 
   if (context === undefined)
     throw new Error("AuthContext was used outside of AuthProvider");
+  return context;
 }
 
 export { AuthProvider, useAuth };
